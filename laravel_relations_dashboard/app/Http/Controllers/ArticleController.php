@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -25,7 +26,8 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        return view('Articles.create');
+        $users = User::all();
+        return view('articles.create',compact('users'));
     }
 
     /**
@@ -119,7 +121,7 @@ class ArticleController extends Controller
      */
     public function destroy(Article $Article)
     {
-        Storage::disk("public")->delete("img/".$Article->image);
+
         $Article->delete();
 
         return redirect()->route('articles.index')->with('message', 'IT WORKS!');

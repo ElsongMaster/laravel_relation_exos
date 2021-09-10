@@ -8,6 +8,7 @@ use App\Models\Article;
 class Commentaire extends Model
 {
     use HasFactory;
+    protected $table = 'commentaires';
 
     protected $fillable = ['contenu'];
 

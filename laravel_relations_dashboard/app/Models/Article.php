@@ -10,6 +10,8 @@ class Article extends Model
 {
     use HasFactory;
 
+    protected $table = 'articles';
+
     protected $fillable  = ['nom','description','date_publication'];
 
     public function user(){

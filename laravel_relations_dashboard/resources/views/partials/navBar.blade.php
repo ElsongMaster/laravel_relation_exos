@@ -1,12 +1,8 @@
-<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-  <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Rôles</a>
-  <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Users</a>
-  <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Articles</a>
-  <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Commentaires</a>
-</div>
-<div class="tab-content" id="v-pills-tabContent">
-  <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">...</div>
-  <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">...</div>
-  <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">...</div>
-  <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">...</div>
-</div>
+<ul class="nav d-flex flex-column  m-2">
+  <li class="nav-item"><a  href="{{route('users.index')}}" class="nav-link border  @if(request()->routeIs('users.index')) active @else '' @endif">Users</a></li>
+
+<li class="nav-item"><a  href="{{route('commentaires.index')}}" class="nav-link border  @if(request()->routeIs('commentaires.index')) active @else '' @endif">Commentaires</a></li>
+  <li class="nav-item"><a  href="{{route('articles.index')}}" class="nav-link border  @if(request()->routeIs('articles.index')) active @else '' @endif">Articles</a></li>
+<li class="nav-item"><a  href="{{route('roles.index')}}" class="nav-link border @if(request()->routeIs('roles.index')) active @else '' @endif">Roles</a></li>
+  
+</ul>

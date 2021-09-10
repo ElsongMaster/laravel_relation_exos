@@ -8,6 +8,7 @@ use App\Models\User;
 class Role extends Model
 {
     use HasFactory;
+    protected $table = 'roles';
 
     protected $fillable = ['nom'];
 

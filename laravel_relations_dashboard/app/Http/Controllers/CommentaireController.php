@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Commentaire;
+use App\Models\Article;
 use Illuminate\Http\Request;
 
 class CommentaireController extends Controller
@@ -14,7 +15,8 @@ class CommentaireController extends Controller
      */
     public function index()
     {
-        
+        $datas = Commentaire::all();
+        return view('pages.allCommentaire',compact('datas'));
     }
 
     /**
@@ -24,7 +26,8 @@ class CommentaireController extends Controller
      */
     public function create()
     {
-        //
+        $articles = Article::all();
+        return view('commentaires.create', compact('articles'));
     }
 
     /**
@@ -80,6 +83,8 @@ class CommentaireController extends Controller
      */
     public function destroy(Commentaire $commentaire)
     {
-        //
+        $commentaire->delete();
+
+        return redirect()->route('commentaires.index')->with('message', 'IT WORKS!');
     }
 }
