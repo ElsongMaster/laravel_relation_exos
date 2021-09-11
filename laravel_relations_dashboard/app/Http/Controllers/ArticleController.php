@@ -80,7 +80,8 @@ class ArticleController extends Controller
     {
 
         $article = $Article;
-        return view('articles.edit',compact('article'));
+        $users = User::all();
+        return view('articles.edit',compact('article','users'));
     }
 
     /**

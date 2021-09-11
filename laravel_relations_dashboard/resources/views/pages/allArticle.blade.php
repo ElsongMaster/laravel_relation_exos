@@ -10,6 +10,7 @@
             <th scope="col">Id</th>
             <th scope="col">Nom</th>
             <th scope="col">Description</th>
+            <th scope="col">Date_pubication</th>
             <th scope="col">user_id</th>
             <th scope="col">Actions</th>
           </tr>

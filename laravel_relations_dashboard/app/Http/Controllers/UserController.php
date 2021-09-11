@@ -69,20 +69,26 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(User $User)
     {
-        //
+        $user = $User;
+
+        return view('users.show',compact('user'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\User  $User
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit(User $User)
     {
-        //
+        $user=  $User;
+        $roles = Role::all();
+
+        return view('users.edit',compact('user','roles'));
+        
     }
 
     /**
@@ -94,7 +100,30 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+
+             request()->validate([
+            "nom"=>["required","min:1","max:100"],
+            "prenom"=>["required","min:1","max:100"],
+            "age"=>["required","numeric"],
+            "email"=>["required"],
+            "password"=>["required"],
+            "date_naissance"=>["required"],
+            "photo"=>["required"],
+        ]);
+
+        $user->photo = $rq->file('photo')->hashName();
+        $user->nom = $rq->nom;
+        $user->prenom = $rq->prenom;
+        $user->age = $rq->age;
+        $user->email = $rq->email;
+        $user->password = $rq->password;
+        $user->date_naissance = $rq->date_naissance;
+        $user->save();
+
+        $rq->file("photo")->storePublicly("img","public");
+
+
+        return redirect()->route('users.show',compact('user'))->with('message', 'IT WORKS!');
     }
 
     /**
@@ -105,6 +134,8 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
+        Storage::disk("public")->delete("img".$video->img);
+        
         $user->delete();
 
         return redirect()->route('users.index')->with('message', 'IT WORKS!');

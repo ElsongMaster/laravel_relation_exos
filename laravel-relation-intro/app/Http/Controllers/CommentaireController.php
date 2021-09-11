@@ -93,7 +93,6 @@ class CommentaireController extends Controller
             "prenom"=>["required","min:1","max:200"],
             "dateDePublication"=>["required","min:1","max:200"],
             "contenu"=>["required"],
-            "video_id"=>["required"],
 
         ]);
 

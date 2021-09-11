@@ -31,8 +31,8 @@
             <td>{{$data->date_naissance}}</td>
             <td>{{$data->role_id}}</td>
             <td class="d-flex justify-content-evenly">
-                <a href="{{route('users.show',$data->id)}}" class="btn btn-info">SHOW</a>
-                <a href="{{route('users.edit',$data->id)}}" class="btn btn-warning">EDIT</a>
+                <a href="{{route('users.show',$data->id)}}" class="btn btn-info me-2">SHOW</a>
+                <a href="{{route('users.edit',$data->id)}}" class="btn btn-warning me-2">EDIT</a>
                   <form action="{{route('users.destroy',$data->id)}}" method="post">
                       @csrf
                       @method('DELETE')

@@ -25,7 +25,8 @@ class RoleController extends Controller
      */
     public function create()
     {
-        return view('roles.create');
+        $roles = Role::all();
+        return view('roles.create',compact('roles'));
     }
 
     /**
@@ -34,9 +35,16 @@ class RoleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $rq)
     {
-        //
+            request()->validate([
+            "nom"=>["required", "min:1","max:200"]
+            ]);
+        $role = new Role;
+        $role->nom = $rq->nom;
+        $role->save();
+
+        return redirect()->route('roles.index');
     }
 
     /**
@@ -45,9 +53,10 @@ class RoleController extends Controller
      * @param  \App\Models\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function show(Role $role)
+    public function show(Role $Role)
     {
-        //
+        $role = $Role;
+        return view('roles.show',compact('role'));
     }
 
     /**
@@ -56,9 +65,12 @@ class RoleController extends Controller
      * @param  \App\Models\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function edit(Role $role)
+    public function edit(Role $Role)
     {
-        //
+
+        $roles = Role::all();
+        $role = $Role;
+        return view('roles.edit',compact('role','roles'));
     }
 
     /**
@@ -68,9 +80,16 @@ class RoleController extends Controller
      * @param  \App\Models\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Role $role)
+    public function update(Request $rq, Role $role)
     {
-        //
+        request()->validate([
+            "nom"=>["required", "min:1","max:200"]
+        ]);
+
+        $role->nom = $rq->nom;
+        $role->save();
+
+        return redirect()->route('roles.index');
     }
 
     /**

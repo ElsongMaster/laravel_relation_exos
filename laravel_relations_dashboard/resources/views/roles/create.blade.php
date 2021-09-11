@@ -28,8 +28,13 @@
 
 
 <div class="mb-3">
-    <label for="nom" class="form-label">Nom</label>
-    <input type="date" value = "{{old('nom')}}" class="form-control" id="nom" name="nom">
+    <select id="monselect" name="nom">
+        @foreach ($roles as $role)
+        <option value="{{$role->nom}}" >{{$role->nom}}</option>   
+        @endforeach
+
+    </select>
+
 </div>
 
 

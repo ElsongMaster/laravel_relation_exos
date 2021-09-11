@@ -36,9 +36,16 @@ class CommentaireController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $rq)
     {
-        //
+        request()->validate([
+            "contenu"=>["required","min:1","max:200"],
+
+        ]);
+        $commentaire = new Commentaire;
+        $commentaire->contenu = $rq->contenu;
+        $commentaire->save();
+        return redirect()->route('commentaires.index')->with('message', 'IT WORKS!');
     }
 
     /**
@@ -47,9 +54,10 @@ class CommentaireController extends Controller
      * @param  \App\Models\Commentaire  $commentaire
      * @return \Illuminate\Http\Response
      */
-    public function show(Commentaire $commentaire)
-    {
-        //
+    public function show(Commentaire $Commentaire)
+    {   
+        $commentaire = $Commentaire;
+        return view('commentaires.show',compact('commentaire'));
     }
 
     /**
@@ -58,9 +66,11 @@ class CommentaireController extends Controller
      * @param  \App\Models\Commentaire  $commentaire
      * @return \Illuminate\Http\Response
      */
-    public function edit(Commentaire $commentaire)
+    public function edit(Commentaire $Commentaire)
     {
-        //
+        $commentaire = $Commentaire;
+        $articles = Article::all();
+        return view('commentaires.edit',compact('commentaire','articles'));
     }
 
     /**
@@ -72,7 +82,15 @@ class CommentaireController extends Controller
      */
     public function update(Request $request, Commentaire $commentaire)
     {
-        //
+        request()->validate([
+            "contenu"=>["required","min:1","max:200"],
+
+        ]);
+
+        $commentaire->contenu = $rq->contenu;
+        $commentaire->save();
+
+        return redirect()->route('commentaires.show',$commentaire->id);
     }
 
     /**
